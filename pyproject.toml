@@ -1,0 +1,31 @@
+# Copy this package to start a new Marvin integration.
+# 1. Rename the distribution (marvin-integration-YOURSERVICE) and the package dir
+#    (src/marvin_integration_example → src/marvin_integration_yourservice).
+# 2. Point the entry point at your provider class.
+# 3. Implement check()/run_action()/poll() in provider.py.
+# 4. Publish, then `uv pip install` it on a Marvin host — it appears with zero core changes.
+
+[project]
+name = "marvin-integration-example"
+version = "0.1.0"
+description = "Template Marvin integration — copy this to build your own."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["marvin-integration-sdk>=0.1,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.11"]
+
+[project.entry-points."marvin.integrations"]
+example = "marvin_integration_example:ExampleProvider"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/marvin_integration_example"]
+
+[tool.ruff]
+line-length = 150
+target-version = "py311"
