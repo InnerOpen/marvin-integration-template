@@ -2,7 +2,7 @@
 # 1. Rename the distribution (marvin-integration-YOURSERVICE) and the package dir
 #    (src/marvin_integration_example → src/marvin_integration_yourservice).
 # 2. Point the entry point at your provider class.
-# 3. Implement check()/run_action()/poll() in provider.py.
+# 3. Implement check()/run_action() in provider.py, and declare any workspace content it needs.
 # 4. Publish, then `uv pip install` it on a Marvin host — it appears with zero core changes.
 
 [project]
@@ -11,7 +11,7 @@ version = "0.1.0"
 description = "Template Marvin integration — copy this to build your own."
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["marvin-integration-sdk>=0.1,<1"]
+dependencies = ["marvin-integration-sdk>=0.2,<1"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.11"]
