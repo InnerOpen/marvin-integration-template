@@ -19,6 +19,10 @@ dev = ["pytest>=8", "ruff>=0.11"]
 [project.entry-points."marvin.integrations"]
 example = "marvin_integration_example:ExampleProvider"
 
+# Dev only: resolve the SDK from the sibling checkout. Released builds take it from the index.
+[tool.uv.sources]
+marvin-integration-sdk = { path = "../MarvinIntegrationSDK", editable = true }
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

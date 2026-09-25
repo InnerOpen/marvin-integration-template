@@ -5,6 +5,8 @@ and a safe ``http`` client via ``ctx``, and it returns results/events. It never 
 or the event bus — the core owns persistence and dispatch.
 """
 
+from typing import ClassVar
+
 from marvin_integration_sdk import (
     CATEGORY_DESTINATION,
     ContentBlueprint,
@@ -23,10 +25,11 @@ class ExampleProvider(IntegrationProvider):
     name = "Example Integration"
     description = "A starting point — copy this package, rename it, and implement your provider."
     category = CATEGORY_DESTINATION  # source | destination | capability | notify
+    icon = "🧩"
 
     # --- what the create form asks for ---
     credentials = (CredentialField(key="api_key", label="API Key", help="Your service's API key."),)
-    config_schema = {
+    config_schema: ClassVar[dict] = {
         "type": "object",
         "properties": {"base_url": {"type": "string", "format": "uri", "title": "Base URL"}},
         "required": ["base_url"],

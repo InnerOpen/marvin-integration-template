@@ -30,9 +30,13 @@ entry point, with **no changes to Marvin core or its frontend**.
 
 ```python
 from marvin_integration_sdk import (
-    CATEGORY_DESTINATION, CredentialField, ProviderAction,
-    IntegrationProvider, register_provider,
+    CATEGORY_DESTINATION,
+    CredentialField,
+    ProviderAction,
+    IntegrationProvider,
+    register_provider,
 )
+
 
 @register_provider
 class MyProvider(IntegrationProvider):
@@ -42,7 +46,7 @@ class MyProvider(IntegrationProvider):
     credentials = (CredentialField(key="api_key", label="API Key"),)
     actions = (ProviderAction(key="ping", label="Ping"),)
 
-    def check(self, ctx):        # ctx has: config, secret, logger, http
+    def check(self, ctx):  # ctx has: config, secret, logger, http
         r = ctx.http.get("https://api.example.com/health")
         return ("ok", None) if r.ok else ("error", f"HTTP {r.status_code}")
 
