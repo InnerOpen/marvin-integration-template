@@ -14,6 +14,7 @@ from marvin_integration_sdk import (
     IntegrationContext,
     IntegrationProvider,
     ProviderAction,
+    WorkflowRecipe,
     register_provider,
 )
 
@@ -81,6 +82,32 @@ class ExampleProvider(IntegrationProvider):
             label="Ping",
             description="Call the base URL and report the HTTP status.",
             input_schema={"type": "object", "properties": {}, "additionalProperties": False},
+        ),
+    )
+
+    # --- what it teaches Marvin (SDK 0.9.0; delete what you don't ship) ---
+    #
+    # `guide` is a markdown file beside this module (package data): Marvin's agents read it when building
+    # workflows where this integration is connected, and Marvin's manual search finds it.
+    #
+    # `recipes` are ready-made workflows in Marvin's Workflow Library, shown as "From the <name> plugin <version>"
+    # and offered once this integration is connected. `{{lower_case}}` placeholders are the workspace's own names,
+    # each declared in `variables` with a type (which picker), a description and an example; `${…}` templates are
+    # filled when the workflow runs. Marvin validates every recipe filled with its examples and skips a bad one.
+    guide = "guide.md"
+    recipes = (
+        WorkflowRecipe(
+            id="hourly-ping",
+            title="Ping every hour",
+            outcome="Calls the service's base URL on a schedule, so a failure shows up in Marvin's alerts.",
+            definition={
+                "trigger": {"type": "schedule", "schedule_type": "interval", "schedule_config": {"interval_seconds": "{{interval_seconds}}"}},
+                "actions": [{"kind": "integration", "integration": "{{example_integration}}", "action": "ping", "args": {}}],
+            },
+            variables={
+                "example_integration": {"type": "integration_slug", "description": "The Example Integration connection.", "example": "example"},
+                "interval_seconds": {"type": "integer", "description": "How often to ping, in seconds.", "example": 3600},
+            },
         ),
     )
 

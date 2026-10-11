@@ -22,6 +22,9 @@ entry point, with **no changes to Marvin core or its frontend**.
    - `check()` — health probe → `(status, error)`
    - `run_action()` — outbound actions; return a result dict
    - `poll()` / `on_webhook()` — for sources: return `PolledEvent`s; the core dispatches them
+   - `guide` / `recipes` (SDK 0.9.0) — a markdown how-to beside the module (`guide.md`) that Marvin's agents and
+     manual search read, and ready-made workflows for Marvin's Workflow Library; see the SDK README,
+     "Teach Marvin about it"
 4. **Test** (`uv run --extra dev pytest`) — your provider depends only on `marvin-integration-sdk`,
    so tests run without Marvin.
 5. **Publish**, then on a Marvin host: `uv pip install marvin-integration-<service>` → restart → done.
