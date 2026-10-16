@@ -17,6 +17,10 @@ entry point, with **no changes to Marvin core or its frontend**.
    ```
 3. **Implement** `provider.py`:
    - `category` — `source` (pulls content in), `destination` (reacts on publish), `notify`, `capability`
+   - `icon` and `logo` — an emoji, and the service's official mark: replace `logo.svg` beside `provider.py` with
+     it (`.svg` or `.png`, at most 64 KB, a plain self-contained mark). Marvin shows the logo on its integrations
+     screens and beside the sidebar group of collections your integration installs, and the emoji when there is
+     no logo or Marvin refuses it; see the SDK README, "Logo"
    - `credentials` — what secret(s) the create form asks for (stored securely; you receive the value as `ctx.secret`)
    - `config_schema` — JSON schema for non-secret settings; the form is generated from it
    - `check()` — health probe → `(status, error)`

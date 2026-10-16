@@ -26,7 +26,11 @@ class ExampleProvider(IntegrationProvider):
     name = "Example Integration"
     description = "A starting point — copy this package, rename it, and implement your provider."
     category = CATEGORY_DESTINATION  # source | destination | capability | notify
-    icon = "🧩"
+    icon = "🧩"  # the fallback when there's no logo
+    # The service's official mark, beside this file (.svg or .png, at most 64 KB; see the SDK README, "Logo").
+    # Marvin shows it on its integrations screens and on the sidebar group of the collections this installs.
+    # Replace logo.svg with your service's mark.
+    logo = "logo.svg"
 
     # --- what the create form asks for ---
     credentials = (CredentialField(key="api_key", label="API Key", help="Your service's API key."),)
